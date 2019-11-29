@@ -108,14 +108,3 @@ class YoutubeDataAPI():
             jsonResult = None
         
         return jsonResult
-
-
-if __name__ == "__main__":
-    apikey = "AIzaSyDbJzfwtRtzYEn_CC9eNoxFn5JjF7qRx_U"
-    yt = YoutubeDataAPI(apikey)
-    part = "id,statistics,snippet"
-    chart = "mostPopular"
-    regionCode = "ES"
-    json = yt.getVideos(part=part,chart=chart,regionCode=regionCode)
-    print(json['items'][0])
-    pass
