@@ -147,6 +147,9 @@ if __name__ == "__main__":
             resp = processVideos(apikey,args.regionCode)
             generateCSV(resp,args.regionCode)
         else:
+            FAIL = '\033[91m'
+            ENDC = '\033[0m'
+            print('{0}"{1}" is not a valid mode.{2}'.format(FAIL,args.mode,ENDC))
             sys.exit(1)
     else:
         resp = processVideos(apikey,args.regionCode)
