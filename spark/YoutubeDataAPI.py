@@ -108,3 +108,68 @@ class YoutubeDataAPI():
             jsonResult = None
         
         return jsonResult
+
+    def getChannels(self,
+            # Required
+            part, #"id,snippet,brandingSettings,contentDetails,invideoPromotion,statistics,topicDetails"
+            # Filters (You have to specify only one)
+            categoryId = None,
+            forUsername = None,
+            _id = None,
+            managedByMe = None,
+            mine = None,
+            mySubscribers = None,
+            # Optional request parameters
+            maxResults = None,
+            onBehalfOfContentOwner = None,
+            pageToken = None
+            ):
+        '''
+        This function gets all the information from YouTube Channels with the given parameters.
+        \n
+        Required parameters:
+        \t * part
+        \n
+        Required ONLY ONE of them:
+        \t * categoryId
+        \t * forUsername
+        \t * _id
+        \t * managedByMe
+        \t * mine
+        \t * mySubscribers
+        \n
+        Optional parameters:
+        \t * maxResults
+        \t * onBehalfOfContentOwner
+        \t * pageToken
+        '''
+        requestParameters = {
+            # Required 
+            "part": part,
+            # Filters
+            "categoryId": categoryId,
+            "forUsername": forUsername,
+            "_id": _id,
+            "managedByMe": managedByMe,
+            "mine": mine,
+            "mySubscribers": mySubscribers,
+            # Optional
+            "maxResults": maxResults,
+            "onBehalfOfContentOwner": onBehalfOfContentOwner,
+            "pageToken": pageToken
+        }
+
+        strParameters = self.parametersParser(requestParameters)
+
+        url = self._youtubeAPIBaseUrl +\
+            "/channels?" +\
+            strParameters +\
+            "&key=" +\
+            self._apiKey
+        
+        try:
+            jsonResult = self.sendRequest(url)
+        except RequestError:
+            jsonResult = None
+        
+        return jsonResult
