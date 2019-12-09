@@ -1,0 +1,90 @@
+#!/usr/bin/python3
+import sys
+import os
+import argparse
+
+# This class is for print colors on terminal.
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def argumentParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input", help="Input csv file")
+    return parser.parse_args()
+
+def createMenuOptions():
+    options = dict()
+    options['1'] = "Most popular video." 
+    options['2'] = "Most played video."
+    options['3'] = "Top 10 videos."
+    options['0'] = "Exit"
+    return options
+
+def createMenuActions():
+    actions = dict()
+    actions['1'] = mostPopularVideo
+    actions['2'] = mostPlayedVideo
+    actions['3'] = top10Videos
+    actions['0'] = exitProgram
+    return actions
+
+def mostPopularVideo():
+    print("Calculating the most popular video...")
+    print(bcolors.OKGREEN + "Success...\nThe answer is: {}." + bcolors.ENDC)
+    pass
+
+def mostPlayedVideo():
+    print("Calculating the most played video...")
+    print(bcolors.OKGREEN + "Success...\nThe answer is: {}." + bcolors.ENDC)
+    pass
+
+def top10Videos():
+    print("Calculating the top 10 videos...")
+    print(bcolors.OKGREEN + "Success...\nThe answer is: {}." + bcolors.ENDC)
+    pass
+
+def exitProgram():
+    exitText = """Thanks for using our program.
+
+    Authors:
+    \t- Daniel Candil Vizcaino
+    \t- Frederick Ernesto Borges Noronha
+    \t- Guillermo Sánchez-Mariscal González
+    """
+    print(exitText)
+    sys.exit(0)
+    pass
+
+def executeMenuOption(option):
+    actions = createMenuActions()
+    function = actions[option]
+    function()
+    pass
+
+def menu(options):
+    # Print options
+    for code, value in options.items(): 
+        print(code, value)
+    
+    # Ask for an option
+    option = input("select option:")
+
+    # Verify if its a valid option and execute it
+    if option in options.keys():
+        executeMenuOption(option)
+    else:
+        print(bcolors.FAIL + "Invalid option" + bcolors.ENDC)
+
+    return True
+
+if __name__ == "__main__":
+    args = argumentParser()
+    options = createMenuOptions()
+    while (menu(options)):pass
