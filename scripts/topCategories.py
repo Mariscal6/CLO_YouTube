@@ -13,16 +13,33 @@ from matplotlib.colors import ListedColormap
 import matplotlib.patches as mpatches
 import seaborn as sb
 
+"""
+
+	Este srcript nos permite sacar estadísticas a nivel global.
+	Según la opción que seleccionemos podemos sacar
+	estadísticas de la categoría, meses y anyo:
+		- month_statistics
+		- global_category
+		- year_statistics
+	
+
+
+"""
+
 def start(options):
 
 	conf = SparkConf().setMaster('local').setAppName('TOP_Category')
 	sc = SparkContext(conf = conf)
 	sqlContext = SQLContext(sc)
+	
+	#diccionario con las abreviaturas y el nombre completo del pais
 
 	countries = {'CA':'Canada','DE':'Alemania','FR':'Francia',
 	           'GB':'Reino Unido','IN':'India','JP':'Japon',
 	           'KR':'Korea','MX':'Mexico','RU':'Rusia',
 	           'US':'Estados Unidos'}
+			   
+	#Estructura para definir las columnas y tipos de nuestro sqlContext
 
 	struct1 = StructType([StructField("video_id", StringType(), True),
 							StructField("trending_date", StringType(), True),
