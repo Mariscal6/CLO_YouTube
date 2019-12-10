@@ -16,9 +16,9 @@ import seaborn as sb
 
 """
 
-	Este srcript nos permite sacar estadísticas a nivel global.
-	Según la opción que seleccionemos podemos sacar
-	estadísticas de la categoría, meses y anyo:
+	Este srcript nos permite sacar estadisticas a nivel global.
+	Segun la opcion que seleccionemos podemos sacar
+	estadisticas de la categoria, meses y anyo:
 		- month_statistics
 		- global_category
 		- year_statistics
@@ -134,7 +134,7 @@ def year_statistics(total_dataframe):
 
 def get_categories():
 
-	#Nos permite obtener el nombre de las categorías
+	#Nos permite obtener el nombre de las categorias
 	#y su id, para poder remplazarlas en los datos
 	
 	with open('../data/CA_category_id.json') as json_file:

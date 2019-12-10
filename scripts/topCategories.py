@@ -15,8 +15,8 @@ import seaborn as sb
 
 """
 
-	Este srcript nos permite sacar estadísticas sobre 
-	categorías de un pais o de todos.
+	Este srcript nos permite sacar estadisticas sobre 
+	categorias de un pais o de todos.
 	Los paises son: 
 		Canada
 		Alemania
