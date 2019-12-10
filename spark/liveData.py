@@ -74,7 +74,7 @@ def processVideos(apikey,regionCode):
     return allVideos
 
 def convertFormat(description):
-    return description.replace("\r"," ") .replace("\n"," ").replace("\t"," ").replace('"'," ")
+    return description.replace("\r"," ") .replace("\n"," ").replace("\t"," ").replace('"'," ").replace(";"," ")
 
 def getDataInLine(data,separator):
     '''
