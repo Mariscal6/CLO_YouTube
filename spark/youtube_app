@@ -24,6 +24,7 @@ def createMenuOptions():
     options['1'] = "Most popular video." 
     options['2'] = "Most played video."
     options['3'] = "Top 10 videos."
+    options['4'] = "HOLA"
     options['0'] = "Exit"
     return options
 
@@ -32,8 +33,13 @@ def createMenuActions():
     actions['1'] = mostPopularVideo
     actions['2'] = mostPlayedVideo
     actions['3'] = top10Videos
+    actions['4'] = printHola
     actions['0'] = exitProgram
     return actions
+
+def printHola():
+    print("HOLA")
+    pass
 
 def mostPopularVideo():
     print("Calculating the most popular video...")
