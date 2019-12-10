@@ -106,8 +106,9 @@ def generateCSV(videos,regionCode):
     """
     This function creates a new csv file with all the information of the videos.
     """ 
-    dt_string = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
-    file_name = regionCode + "_" + dt_string + ".csv"
+    #dt_string = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    #file_name = regionCode + "_" + dt_string + ".csv"
+    file_name = "dataStreaming.csv"
     path = os.path.join(os.getcwd(),file_name)
 
     with open(path, 'w',newline='') as file:

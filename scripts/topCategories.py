@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import matplotlib.patches as mpatches
 import seaborn as sb
+import sys
 
 """
 
@@ -31,19 +32,18 @@ import seaborn as sb
 	
 """
 
-def start(options):
+#diccionario con las abreviaturas y el nombre completo del pais
+countries = {'CA':'Canada','DE':'Alemania','FR':'Francia',
+			'GB':'Reino Unido','IN':'India','JP':'Japon',
+			'KR':'Korea','MX':'Mexico','RU':'Rusia',
+			'US':'Estados Unidos'}
+
+def start(country,mode):
 
 	conf = SparkConf().setMaster('local').setAppName('TOP_Category')
 	sc = SparkContext(conf = conf)
 	sqlContext = SQLContext(sc)
-	
-	#diccionario con las abreviaturas y el nombre completo del pais
-
-	countries = {'CA':'Canada','DE':'Alemania','FR':'Francia',
-	           'GB':'Reino Unido','IN':'India','JP':'Japon',
-	           'KR':'Korea','MX':'Mexico','RU':'Rusia',
-	           'US':'Estados Unidos'}
-			   
+		   
 	#Estructura para definir las columnas y tipos de nuestro sqlContext
 
 	struct1 = StructType([StructField("video_id", StringType(), True),
@@ -66,15 +66,24 @@ def start(options):
 	prefijos = countries.keys()
 
 	with open('../data/CA_category_id.json') as json_file:
-	    data = json.load(json_file)
-	    store_list = dict()
-	    for item in data['items']:
-	    	index = int(item['id'])
-	        store_list[index] = item['snippet']['title']
-	    print (store_list.values())
+		data = json.load(json_file)
+		store_list = dict()
+		for item in data['items']:
+			index = int(item['id'])
+			store_list[index] = item['snippet']['title']
+		print (store_list.values())
 
-	#console_all(prefijos,store_list,sqlContext,struct1)
-	graficas_all(prefijos,store_list,countries)
+	if (mode == "CONSOLE"):
+		if (country == "ALL"):
+			console_all(prefijos,store_list,sqlContext,struct1)
+		else:
+			console_pais(country,store_list,struct1,sqlContext)
+	else:
+		if (country == "ALL"):
+			graficas_all(prefijos,store_list,countries)
+		else:
+			graficas_pais(country,store_list,countries)
+		
 
 def console_all(prefijos,category_list,sqlContext,struct1):
 
@@ -98,6 +107,7 @@ def console_pais(countrie,category_list,struct1,sqlContext):
 	categories.show()
 
 	return df
+
 def graficas_pais(countrie,category_list,countries):
 
 	ruta = '../data/'+countrie+'videos.csv'
@@ -125,5 +135,25 @@ def graficas_all(prefijos,category_list,countries):
 	return dataframes	
 
 if __name__ == "__main__":
-    start("hola")
+	## ARGUMENT PARSER
+	import argparse
+	parser = argparse.ArgumentParser()
+	helpRegionCode = 'Region code for the youtube videos, by default ALL.\nPossible regions:\nCA: Canada,\n\tDE: Alemania,\n\tFR: Francia,\n\tGB: Reino Unido,\n\tIN: India,\n\tJP: Japon,\n\tKR: Korea,\n\tMX: Mexico,\n\tRU: Rusia,\n\tUS: Estados Unidos'
+	parser.add_argument("regionCode", help=helpRegionCode, default="ALL")
+	parser.add_argument("-m","--mode", help='console or graph, by default is console',default="console")
+	args = parser.parse_args()
+	## END OF ARGUMENT PARSER
+
+	region = args.regionCode.upper()
+	mode = args.mode.upper()
+
+	if (region not in countries.keys()):
+		sys.exit(1)
+		pass
+
+	if (mode not in ["CONSOLE","GRAPH"]):
+		sys.exit(1)
+		pass
+
+	start(region,mode)
     
