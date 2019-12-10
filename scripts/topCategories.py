@@ -15,15 +15,20 @@ import seaborn as sb
 
 """
 
-	Este srcript nos permite sacar estadísticas a nivel global.
-	Según la opción que seleccionemos podemos sacar
-	estadísticas de la categoría, meses y anyo:
-		- month_statistics
-		- global_category
-		- year_statistics
+	Este srcript nos permite sacar estadísticas sobre 
+	categorías de un pais o de todos.
+	Los paises son: 
+		Canada
+		Alemania
+		Francia
+		Reino Unido
+		India
+		Japon
+		Korea
+		Mexico
+		Rusia
+		Estados Unidos
 	
-
-
 """
 
 def start(options):
