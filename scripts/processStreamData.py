@@ -7,14 +7,13 @@ import string
 import pandas as pd
 import numpy as np
 import json
-from pyspark.sql.functions import col, create_map, lit
+from pyspark.sql.functions import col, create_map, lit, date_format
 from itertools import chain
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import matplotlib.patches as mpatches
 import seaborn as sb
 import sys
-import datetime 
 
 """
 
@@ -22,13 +21,9 @@ import datetime
   Espana en tiempo real.
 		- Dias de la semana con mas visitas
     - Canales con mayor proporcion de views y subs
-    - Canales mas vistos esta semana
     - Top 10 likes
     - Top 10 more coment
 
-	
-
-    datetime.datetime.today().weekday()
 """
 
 
@@ -40,54 +35,76 @@ def start(topic):
 
     # Estructura para definir las columnas y tipos de nuestro sqlContext
 
-    struct1 = StructType([StructField("video_id", StringType(), True),
-                          StructField("trending_date", StringType(), True),
-                          StructField("title", StringType(), True),
-                          StructField("channel_title", StringType(), True),
+    struct1 = StructType([StructField("videoID", StringType(), True),
+                          StructField("Published_at", TimestampType(), True),
+                          StructField("Video_title", StringType(), True),
+                          StructField("Description", StringType(), True),
                           StructField("category_id", IntegerType(), True),
-                          StructField("publish_time", StringType(), True),
-                          StructField("tags", StringType(), True),
-                          StructField("views)", StringType(), True),
-                          StructField("likes", StringType(), True),
-                          StructField("dislikes", StringType(), True),
-                          StructField("comment_count", StringType(), True),
-                          StructField("thumbnail_link", StringType(), True),
-                          StructField("comments_disabled", StringType(), True),
-                          StructField("ratings_disabled", StringType(), True),
-                          StructField("video_error_or_removed",
-                                      StringType(), True),
-                          StructField("description", StringType(), True)])
+                          StructField("Channel_title", StringType(), True),
+                          StructField("Tags", StringType(), True),
+                          StructField("View_count", IntegerType(), True),
+                          StructField("Like_count", IntegerType(), True),
+                          StructField("Dislike_count", IntegerType(), True),
+                          StructField("Favorite_count", IntegerType(), True),
+                          StructField("Comment_count", IntegerType(), True)
+                         ])
 
-    prefijos = countries.keys()
-
+    print ("------------------------------")
     #En dataframe juntaremos los datos de todos los paises
     # para poder sacar estadisticas globales
     ruta = '../spark/dataStreaming.csv'
-    dataframe = pd.read_csv(ruta)
-   
+    #dataframe = pd.read_csv(ruta,sep = ';')
+    dataframe = sqlContext.read.csv(ruta, header = True, sep=';',encoding='utf-8')
+    dataframe.printSchema()
     #topic not in ["most_view", "top_revelation", "best_day","most_liked","most_comented"]):
-    df = pd.read_csv(ruta)
+    #df = pd.read_csv(ruta)
 
-    if (topic == "most_view"):
-        year_statistics(dataframe)
-    elif (topic == "top_revelation"):
+    if (topic == "MOST_VIEW"):
+        most_view(dataframe,sqlContext)
+    elif (topic == "TOP_REVELATION"):
         month_statistics(dataframe)
-    elif (topic == "best_day"):
-        month_statistics(dataframe)
-    elif (topic == "most_liked"):
-        month_statistics(dataframe)
+    elif (topic == "BEST_DAY_OF_WEEK"):
+        best_day_of_week(dataframe,sqlContext)
+    elif (topic == "MOST_LIKED"):
+        most_liked(dataframe,sqlContext)
+    elif (topic == "MOST_COMMENTED"):
+        most_comented(dataframe,sqlContext)
     else:
         global_category(dataframe)
 
-def most_view(df):
-
-  categories = df.groupBy("category_id").count()
-  #mapping_expr = create_map([lit(x) for x in chain(*category_list.items())])
-  #categories = categories.withColumn('category_id', mapping_expr[categories['category_id']])
-  categories = categories.filter(categories.category_id. isNotNull())
-  categories.show()
+def most_view(df,sqlContext):
+  df.createOrReplaceTempView("videos")
+  df_final=sqlContext.sql("SELECT V.Video_title,V.View_count FROM videos as V ORDER BY BIGINT(V.View_count) DESC")
+  df_final.show(10,False)
 
   return df
+
+def most_liked(df,sqlContext):
+  df.createOrReplaceTempView("videos")
+  df_final=sqlContext.sql("SELECT V.Video_title,V.Like_count FROM videos as V ORDER BY BIGINT(V.Like_count) DESC")
+  df_final.show(10,False)
+
+  pass
+
+def most_comented(df,sqlContext):
+  df.createOrReplaceTempView("videos")
+  df_final=sqlContext.sql("SELECT V.Video_title,V.Comment_count FROM videos as V ORDER BY BIGINT(V.Comment_count) DESC")
+  df_final.show(10,False)
+
+  pass
+
+def best_day_of_week(df,sqlContext):
+  df.createOrReplaceTempView("videos")
+  df = sqlContext.sql("SELECT V.Video_title,timestamp(V.Published_at),V.View_count FROM videos as V")
+  df = df.select('Video_title','Published_at','View_count',  date_format('Published_at', 'E').alias('WeekDay'))
+  df.createOrReplaceTempView("videos_dia")
+  df = sqlContext.sql("SELECT V.WeekDay, sum(V.View_count) AS vitas_en_dia FROM videos_dia as V GROUP BY V.WeekDay ORDER BY vitas_en_dia DESC")
+  #df_final.show(10,False)
+  #df2 = df.select("Published_at").rdd.flatMap(lambda x: x + ("anything", )).toDF()
+  #df.Published_at = df.Published_at.apply(lambda x: x.weekday())
+  df.show()
+  #df.printSchema()
+  pass
 
 def top_revelation(df):
 
@@ -119,27 +136,6 @@ def global_category(total_dataframe):
     fig.savefig('categoriaTopGlobal.png', dpi=100)
 
     return df
-
-def most_view(dataframe):
-
-    total_dataframe['publish_time'] = total_dataframe['publish_time'].apply(
-        lambda x: str(x)[5:7])
-
-    resultados = total_dataframe.groupby('publish_time').mean()
-    #resultados = total_dataframe.groupBy("publish_time").mean()
-    print(resultados)
-    resultados['views'] = resultados['views'].astype(int)
-    fig = plt.figure(figsize=(12, 6))
-
-    axes = fig.add_subplot(111)
-
-    axes.plot(resultados.views, marker='o')
-
-    axes.set(ylabel='Numero de visitas totales', xlabel='Mes',
-             title='Meses con mas visitas de media')
-    plt.savefig('month_statistics.png')
-
-    pass
 
 
 def global_category(total_dataframe):
@@ -203,13 +199,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     #helpRegionCode = 'Region code for the youtube videos, by default ALL.\nPossible regions:\nCA: Canada,\n\tDE: Alemania,\n\tFR: Francia,\n\tGB: Reino Unido,\n\tIN: India,\n\tJP: Japon,\n\tKR: Korea,\n\tMX: Mexico,\n\tRU: Rusia,\n\tUS: Estados Unidos'
     parser.add_argument(
-        "topic", help="Available options: 1. most_view\n 2. top_revelation\n 3. best_day\n 4. most_liked\n 5. most_comented", default="ALL")
+        "topic", help="Available options: 1. most_view\n 2. top_revelation\n 3. best_day_of_week\n 4. most_liked\n 5. most_comented", default="ALL")
     args = parser.parse_args()
     # END OF ARGUMENT PARSER
 
     topic = args.topic.upper()
 
-    if (topic not in ["most_view", "top_revelation", "best_day","most_liked","most_comented"]):
+    if (topic not in ["MOST_VIEW", "TOP_REVELATION", "BEST_DAY_OF_WEEK","MOST_LIKED","MOST_COMENTED"]):
         sys.exit(1)
         pass
 
