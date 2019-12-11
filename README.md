@@ -13,7 +13,7 @@
 	
 ## Web 
 
-Pagina web: https://faraondaniel.github.io/prueba-web/
+Pagina web: https://faraondaniel.github.io/prueba-web/index.html
 	
 ## Descripción
 
