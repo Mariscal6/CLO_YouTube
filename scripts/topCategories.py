@@ -13,6 +13,7 @@ from matplotlib.colors import ListedColormap
 import matplotlib.patches as mpatches
 import seaborn as sb
 import sys
+from readRegions import region_dict
 
 """
 
@@ -33,10 +34,7 @@ import sys
 """
 
 #diccionario con las abreviaturas y el nombre completo del pais
-countries = {'CA':'Canada','DE':'Alemania','FR':'Francia',
-			'GB':'Reino Unido','IN':'India','JP':'Japon',
-			'KR':'Korea','MX':'Mexico','RU':'Rusia',
-			'US':'Estados Unidos'}
+countries = region_dict()
 
 def start(country,mode):
 	print(1)
