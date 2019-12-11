@@ -39,12 +39,14 @@ countries = {'CA':'Canada','DE':'Alemania','FR':'Francia',
 			'US':'Estados Unidos'}
 
 def start(country,mode):
+	print(1)
 
-	conf = SparkConf().setMaster('local').setAppName('TOP_Category')
+	conf = SparkConf().setMaster('local').setAppName('Top_Category')
 	sc = SparkContext(conf = conf)
 	sqlContext = SQLContext(sc)
 		   
 	#Estructura para definir las columnas y tipos de nuestro sqlContext
+	print(2)
 
 	struct1 = StructType([StructField("video_id", StringType(), True),
 							StructField("trending_date", StringType(), True),
@@ -86,7 +88,6 @@ def start(country,mode):
 		
 
 def console_all(prefijos,category_list,sqlContext,struct1):
-
 	dataframes = dict() 
 
 	for countrie in prefijos:
@@ -96,7 +97,6 @@ def console_all(prefijos,category_list,sqlContext,struct1):
 	return dataframes
 
 def console_pais(countrie,category_list,struct1,sqlContext):
-
 	ruta = '../data/'+countrie+'videos.csv'
 	df = sqlContext.read.csv(ruta, header = True, sep=',',schema=struct1,encoding='utf-8')
 
@@ -109,7 +109,6 @@ def console_pais(countrie,category_list,struct1,sqlContext):
 	return df
 
 def graficas_pais(countrie,category_list,countries):
-
 	ruta = '../data/'+countrie+'videos.csv'
 	print(ruta)
 	df= pd.read_csv(ruta)
@@ -135,6 +134,7 @@ def graficas_all(prefijos,category_list,countries):
 	return dataframes	
 
 if __name__ == "__main__":
+	
 	## ARGUMENT PARSER
 	import argparse
 	parser = argparse.ArgumentParser()
@@ -143,7 +143,6 @@ if __name__ == "__main__":
 	parser.add_argument("-m","--mode", help='console or graph, by default is console',default="console")
 	args = parser.parse_args()
 	## END OF ARGUMENT PARSER
-
 	region = args.regionCode.upper()
 	mode = args.mode.upper()
 
@@ -154,6 +153,6 @@ if __name__ == "__main__":
 	if (mode not in ["CONSOLE","GRAPH"]):
 		sys.exit(1)
 		pass
-
+	
 	start(region,mode)
     

@@ -14,7 +14,6 @@ from matplotlib.colors import ListedColormap
 import matplotlib.patches as mpatches
 import seaborn as sb
 import sys
-
 """
 
 	Este srcript nos permite sacar estadisticas a nivel global.
