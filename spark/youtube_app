@@ -159,5 +159,6 @@ def menu(options):
 
 if __name__ == "__main__":
     args = argumentParser()
+    os.system("python3 liveData.py {COUNTRY}".format(COUNTRY=args.regionCode.upper()))
     options = createMenuOptions()
     while (menu(options)):pass
