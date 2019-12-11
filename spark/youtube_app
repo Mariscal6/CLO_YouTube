@@ -99,6 +99,7 @@ def videosWithMoreComments():
 
 def categoryGraphByCountry():
     pais = str(input("Indique el codigo del país: "))
+    os.system("python3 liveData.py {COUNTRY}".format(COUNTRY=pais))
     path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
     cmd = "spark-submit \"{PATH}\" -m graph {COUNTRY}".format(PATH=path,COUNTRY=pais)
     os.system(cmd)
@@ -112,6 +113,7 @@ def categoryGraphWorldwide():
 
 def showCategoriesByCountry():
     pais = str(input("Indique el codigo del país: "))
+    os.system("python3 liveData.py {COUNTRY}".format(COUNTRY=pais))
     path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
     cmd = "spark-submit \"{PATH}\" -m console {COUNTRY}".format(PATH=path,COUNTRY=pais)
     os.system(cmd)
