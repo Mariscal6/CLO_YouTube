@@ -1,5 +1,6 @@
 
-# ANÁLISIS DE VIDEOS DE ![](https://i.pinimg.com/originals/32/3e/02/323e02791f3dfb353927386dfaec81d9.png)
+# ANÁLISIS DE VIDEOS DE 
+![](https://i.pinimg.com/originals/32/3e/02/323e02791f3dfb353927386dfaec81d9.png)
 
 ## Autores
 [1]:https://github.com/FaraonDaniel
