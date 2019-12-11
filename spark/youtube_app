@@ -18,7 +18,8 @@ class bcolors:
 
 def argumentParser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("input", help="Input csv file")
+    helpRegionCode = 'Region code for the youtube videos, by default ALL.\nPossible regions:\nCA: Canada,\nDE: Alemania,\n\tFR: Francia,\n\tGB: Reino Unido,\n\tIN: India,\n\tJP: Japon,\n\tKR: Korea,\n\tMX: Mexico,\n\tRU: Rusia,\n\tUS: Estados Unidos'
+    parser.add_argument("regionCode", help=helpRegionCode)
     return parser.parse_args()
 
 def createMenuOptions():
@@ -97,7 +98,7 @@ def videosWithMoreComments():
     pass
 
 def categoryGraphByCountry():
-    pais = input("Indique el codigo del país: ")
+    pais = str(input("Indique el codigo del país: "))
     path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
     cmd = "spark-submit \"{PATH}\" -m graph {COUNTRY}".format(PATH=path,COUNTRY=pais)
     os.system(cmd)
@@ -110,7 +111,7 @@ def categoryGraphWorldwide():
     pass
 
 def showCategoriesByCountry():
-    pais = input("Indique el codigo del país: ")
+    pais = str(input("Indique el codigo del país: "))
     path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
     cmd = "spark-submit \"{PATH}\" -m console {COUNTRY}".format(PATH=path,COUNTRY=pais)
     os.system(cmd)
@@ -146,7 +147,7 @@ def menu(options):
         print(code, value)
     
     # Ask for an option
-    option = input("select option:")
+    option = input("select option: ")
 
     # Verify if its a valid option and execute it
     if option in options.keys():
@@ -157,6 +158,6 @@ def menu(options):
     return True
 
 if __name__ == "__main__":
-    #args = argumentParser()
+    args = argumentParser()
     options = createMenuOptions()
     while (menu(options)):pass
