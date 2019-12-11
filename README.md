@@ -30,7 +30,7 @@ Muchas empresas y muchos usuarios utilizan la plataforma de YouTube como modo pu
 ### De dónde recogimos los datos base
 [4]:https://www.kaggle.com/datasnaek/youtube-new
 
-Los datos que usamos como base para el análisis de los videos los encontramos a través de la web Kaggle.
+Los datos que usamos como base para el análisis de los videos los encontramos a través de la web [Kaggle][4].
 El dataset vienen en formato csv y las categoría de los videos en formato JSON.
 
 ### Cómo se configura
