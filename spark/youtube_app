@@ -3,6 +3,8 @@ import sys
 import os
 import argparse
 
+PROJECT_PATH = os.path.dirname(os.getcwd())
+
 # This class is for print colors on terminal.
 class bcolors:
     HEADER = '\033[95m'
@@ -21,39 +23,103 @@ def argumentParser():
 
 def createMenuOptions():
     options = dict()
-    options['1'] = "Most popular video." 
-    options['2'] = "Most played video."
-    options['3'] = "Top 10 videos."
-    options['4'] = "HOLA"
+    options['1'] = "Media de visitas por mes." 
+    options['2'] = "Media de visitas por año."
+    options['3'] = "Categoria con mas videos."
+    options['4'] = "Top 10 de videos mas vistos." 
+    options['5'] = "Dia de la semana con mas visitas."
+    options['6'] = "Videos con mayor cantidad de likes."
+    options['7'] = "Videos con mayor cantidad de comentarios."
+    options['8'] = "Gráfica de categorias por pais."
+    options['9'] = "Gráfica de categorias mundial." 
+    options['10'] = "Cuadro de categorias por país."
+    options['11'] = "Cuadro de categorias mundial."
     options['0'] = "Exit"
     return options
 
 def createMenuActions():
     actions = dict()
-    actions['1'] = mostPopularVideo
-    actions['2'] = mostPlayedVideo
-    actions['3'] = top10Videos
-    actions['4'] = printHola
+    actions['1'] = averageVisitsPerMonth
+    actions['2'] = averageVisitsPerYear
+    actions['3'] = categoryWithMoreVideos
+    actions['4'] = top10VideosWithMore
+    actions['5'] = weekdayWithMoreVisits
+    actions['6'] = videosWithMoreLikes
+    actions['7'] = videosWithMoreComments
+    actions['8'] = categoryGraphByCountry
+    actions['9'] = categoryGraphWorldwide
+    actions['10'] = showCategoriesByCountry
+    actions['11'] = showCategoriesWorldwide
     actions['0'] = exitProgram
     return actions
 
-def printHola():
-    print("HOLA")
+def averageVisitsPerMonth():
+    path = os.path.join(PROJECT_PATH,"scripts","globalStadistics.py")
+    cmd = "spark-submit \"{PATH}\" MONTH".format(PATH=path)
+    print(cmd)
+    os.system(cmd)
     pass
 
-def mostPopularVideo():
-    print("Calculating the most popular video...")
-    print(bcolors.OKGREEN + "Success...\nThe answer is: {}." + bcolors.ENDC)
+def averageVisitsPerYear():
+    path = os.path.join(PROJECT_PATH,"scripts","globalStadistics.py")
+    cmd = "spark-submit \"{PATH}\" YEAR".format(PATH=path)
+    os.system(cmd)
     pass
 
-def mostPlayedVideo():
-    print("Calculating the most played video...")
-    print(bcolors.OKGREEN + "Success...\nThe answer is: {}." + bcolors.ENDC)
+def categoryWithMoreVideos():
+    path = os.path.join(PROJECT_PATH,"scripts","globalStadistics.py")
+    cmd = "spark-submit \"{PATH}\" CATEGORY".format(PATH=path)
+    os.system(cmd)
     pass
 
-def top10Videos():
-    print("Calculating the top 10 videos...")
-    print(bcolors.OKGREEN + "Success...\nThe answer is: {}." + bcolors.ENDC)
+def top10VideosWithMore():
+    path = os.path.join(PROJECT_PATH,"scripts","processStreamData.py")
+    cmd = "spark-submit \"{PATH}\" most_view".format(PATH=path)
+    os.system(cmd)
+    pass
+
+def weekdayWithMoreVisits():
+    path = os.path.join(PROJECT_PATH,"scripts","processStreamData.py")
+    cmd = "spark-submit \"{PATH}\" best_day_of_week".format(PATH=path)
+    os.system(cmd)
+    pass
+
+def videosWithMoreLikes():
+    path = os.path.join(PROJECT_PATH,"scripts","processStreamData.py")
+    cmd = "spark-submit \"{PATH}\" MOST_LIKED".format(PATH=path)
+    os.system(cmd)
+    pass
+
+def videosWithMoreComments():
+    path = os.path.join(PROJECT_PATH,"scripts","processStreamData.py")
+    cmd = "spark-submit \"{PATH}\" MOST_COMMENTED".format(PATH=path)
+    os.system(cmd)
+    pass
+
+def categoryGraphByCountry():
+    pais = input("Indique el codigo del país: ")
+    path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
+    cmd = "spark-submit \"{PATH}\" -m graph {COUNTRY}".format(PATH=path,COUNTRY=pais)
+    os.system(cmd)
+    pass
+
+def categoryGraphWorldwide():
+    path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
+    cmd = "spark-submit \"{PATH}\" -m graph ALL".format(PATH=path)
+    os.system(cmd)
+    pass
+
+def showCategoriesByCountry():
+    pais = input("Indique el codigo del país: ")
+    path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
+    cmd = "spark-submit \"{PATH}\" -m console {COUNTRY}".format(PATH=path,COUNTRY=pais)
+    os.system(cmd)
+    pass
+
+def showCategoriesWorldwide():
+    path = os.path.join(PROJECT_PATH,"scripts","topCategories.py")
+    cmd = "spark-submit \"{PATH}\" -m console ALL".format(PATH=path)
+    os.system(cmd)
     pass
 
 def exitProgram():
@@ -91,6 +157,6 @@ def menu(options):
     return True
 
 if __name__ == "__main__":
-    args = argumentParser()
+    #args = argumentParser()
     options = createMenuOptions()
     while (menu(options)):pass

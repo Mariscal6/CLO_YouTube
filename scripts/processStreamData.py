@@ -49,13 +49,12 @@ def start(topic):
                           StructField("Comment_count", IntegerType(), True)
                          ])
 
-    print ("------------------------------")
+    
     #En dataframe juntaremos los datos de todos los paises
     # para poder sacar estadisticas globales
     ruta = '../spark/dataStreaming.csv'
     #dataframe = pd.read_csv(ruta,sep = ';')
     dataframe = sqlContext.read.csv(ruta, header = True, sep=';',encoding='utf-8')
-    dataframe.printSchema()
     #topic not in ["most_view", "top_revelation", "best_day","most_liked","most_comented"]):
     #df = pd.read_csv(ruta)
 
@@ -69,8 +68,6 @@ def start(topic):
         most_liked(dataframe,sqlContext)
     elif (topic == "MOST_COMMENTED"):
         most_comented(dataframe,sqlContext)
-    else:
-        global_category(dataframe)
 
 def most_view(df,sqlContext):
   df.createOrReplaceTempView("videos")
@@ -119,64 +116,6 @@ def top_revelation(df):
 
   return df
 
-
-
-def global_category(total_dataframe):
-
-    category_list = get_categories()
-    df = total_dataframe.replace({"category_id": category_list})
-    f = sb.catplot('category_id', data=df, kind="count", aspect=3,
-                   hue_order=category_list.values(), order=category_list.values())
-    f.set_xticklabels(fontsize=11)
-    plt.xlabel("Categoria")
-    plt.ylabel("Numero de videos en tendencias")
-    plt.title("Numero de videos en tendencias globales")
-    fig = plt.gcf()
-    fig.set_size_inches(30, 10.5)
-    fig.savefig('categoriaTopGlobal.png', dpi=100)
-
-    return df
-
-
-def global_category(total_dataframe):
-
-    category_list = get_categories()
-    df = total_dataframe.replace({"category_id": category_list})
-    f = sb.catplot('category_id', data=df, kind="count", aspect=3,
-                   hue_order=category_list.values(), order=category_list.values())
-    f.set_xticklabels(fontsize=11)
-    plt.xlabel("Categoria")
-    plt.ylabel("Numero de videos en tendencias")
-    plt.title("Numero de videos en tendencias globales")
-    fig = plt.gcf()
-    fig.set_size_inches(30, 10.5)
-    fig.savefig('categoriaTopGlobal.png', dpi=100)
-
-    return df
-
-
-def year_statistics(total_dataframe):
-
-    total_dataframe['publish_time'] = total_dataframe['publish_time'].apply(
-        lambda x: str(x)[:4])
-
-    resultados = total_dataframe.groupby('publish_time').mean()
-    #resultados = total_dataframe.groupBy("publish_time").mean()
-    print(resultados)
-    resultados['views'] = resultados['views'].astype(int)
-    fig = plt.figure(figsize=(12, 6))
-
-    axes = fig.add_subplot(111)
-
-    axes.plot(resultados.views, marker='o')
-
-    axes.set(ylabel='Numero de visitas totales', xlabel='Mes',
-             title='Meses con mas visitas de media')
-    plt.savefig('year_statistics.png')
-
-    pass
-
-
 def get_categories():
 
     # Nos permite obtener el nombre de las categorias
@@ -199,13 +138,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     #helpRegionCode = 'Region code for the youtube videos, by default ALL.\nPossible regions:\nCA: Canada,\n\tDE: Alemania,\n\tFR: Francia,\n\tGB: Reino Unido,\n\tIN: India,\n\tJP: Japon,\n\tKR: Korea,\n\tMX: Mexico,\n\tRU: Rusia,\n\tUS: Estados Unidos'
     parser.add_argument(
-        "topic", help="Available options: 1. most_view\n 2. top_revelation\n 3. best_day_of_week\n 4. most_liked\n 5. most_comented", default="ALL")
+        "topic", help="Available options: 1. most_view\n 2. top_revelation\n 3. best_day_of_week\n 4. most_liked\n 5. most_commented", default="ALL")
     args = parser.parse_args()
     # END OF ARGUMENT PARSER
 
     topic = args.topic.upper()
 
-    if (topic not in ["MOST_VIEW", "TOP_REVELATION", "BEST_DAY_OF_WEEK","MOST_LIKED","MOST_COMENTED"]):
+    if (topic not in ["MOST_VIEW", "TOP_REVELATION", "BEST_DAY_OF_WEEK","MOST_LIKED","MOST_COMMENTED"]):
         sys.exit(1)
         pass
 
