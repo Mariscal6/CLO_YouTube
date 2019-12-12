@@ -10,7 +10,7 @@ import csv
 
 # diccionario con las abreviaturas y el nombre completo del pais
 countries = region_dict()
-MAX_ROWS = 3000
+MAX_ROWS = 1000
 
 def processVideos(apikey,regionCode):
     '''
