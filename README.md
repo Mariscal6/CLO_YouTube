@@ -34,7 +34,5 @@ Los datos que usamos como base para el análisis de los videos los encontramos a
 El dataset vienen en formato csv y las categoría de los videos en formato JSON.
 
 ### Cómo se configura
-```python
+https://mariscal6.github.io/CLO_YouTube/pages/html/tecnico.html
 
-
-```
