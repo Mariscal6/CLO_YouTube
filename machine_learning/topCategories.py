@@ -5,10 +5,6 @@ from matplotlib.colors import ListedColormap
 import matplotlib.patches as mpatches
 import seaborn as sb
 
-%matplotlib inline
-plt.rcParams['figure.figsize'] = (30, 50)
-plt.style.use('ggplot')
-
 from sklearn.model_selection import train_test_split
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression
