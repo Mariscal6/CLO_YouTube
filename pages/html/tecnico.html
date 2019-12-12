@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Análisis Youtube</title>
+  <link rel="shortcut icon" href="../img/icon.png"> 
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/grayscale.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Volver arriba</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="../../index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="../about.html">Sobre el proyecto</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="../graficas.html">Gráficas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="../tiemporeal.html">Tiempo real</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="../machinelearning.html">Machine Learning</a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- About Section -->
+  <section id="about" class="about-section text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-white mb-4">DESCRIPCIÓN TÉCNICA</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Projects Section -->
+
+<section id="projects" class="projects-section bg-light">
+    <div class="container">
+
+      <!-- Featured Project Row -->
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>HERRAMIENTAS</h4>
+            <p class="text-black-50 mb-0"> Para poder realizar este análisis y tratamiento de los datos,
+              hemos utilizado Spark con Python en un cluster de Spark en AWS (Amazon Web Service). </p>
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>LIBRERÍAS</h4>
+            <p class="text-black-50 mb-0">Para nuestro proyecto hemos usado las librerías:</p>
+            <p class="text-black-50 mb-0">&nbsp ■ Pandas</p>
+            <p class="text-black-50 mb-0">&nbsp ■ Numpy</p>
+            <p class="text-black-50 mb-0">&nbsp ■ Seaborn</p>
+            <p class="text-black-50 mb-0">&nbsp ■ Matplotlib</p>
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>CÓMO INSTALAR LAS LIBRERÍAS</h4>
+            <pre class="text-white-50 mb-0" style="background-color: #2C3E50;"> sudo pip install [librería]</pre>
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+        <div class="featured-text text-center text-lg-left">
+          <h4>MENU PRINCIPAL</h4>
+          <pre class="text-white-50 mb-0" style="background-color: #2C3E50;"> spark-submit youtube_app [option] </pre>
+          <p class="text-black-50 mb-0">Donde option puede ser:</p>
+          <p class="text-black-50 mb-0">&nbsp 1 = "Media de visitas por mes." </p>
+          <p class="text-black-50 mb-0">&nbsp 2 = "Media de visitas por año." </p>
+          <p class="text-black-50 mb-0">&nbsp 3 = "Categoria con mas videos." </p>
+          <p class="text-black-50 mb-0">&nbsp 4 = "Top 10 de videos mas vistos." </p>
+          <p class="text-black-50 mb-0">&nbsp 5 = "Dia de la semana con mas visitas." </p>
+          <p class="text-black-50 mb-0">&nbsp 6 = "Videos con mayor cantidad de likes." </p>
+          <p class="text-black-50 mb-0">&nbsp 7 = "Videos con mayor cantidad de comentarios." </p>
+          <p class="text-black-50 mb-0">&nbsp 8 = "Gráfica de categorias por pais." </p>
+          <p class="text-black-50 mb-0">&nbsp 9 = "Gráfica de categorias mundial."  </p>
+          <p class="text-black-50 mb-0">&nbsp 10 = "Cuadro de categorias por país." </p>
+          <p class="text-black-50 mb-0">&nbsp 11 = "Cuadro de categorias mundial." </p>
+          <p class="text-black-50 mb-0">&nbsp 0 = "Exit" </p>
+
+        </div>
+      </div>
+
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>VER MEJORES DÍAS PARA SUBIR VIDEOS</h4>
+            <pre class="text-white-50 mb-0" style="background-color: #2C3E50;"> spark-submit processStreamData.py best_day_of_week </pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+          </div>
+          <div class="col-xl-8 col-lg-7">
+              <img class="img-fluid featured-text mb-3 mb-lg-0" src="../img/codigos/bestday.PNG" alt="">
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+        
+          <div class="featured-text text-center text-lg-left">
+            <h4>VER VIDEOS MÁS COMENTADOS</h4>
+            <pre class="text-white-50 mb-0" style="background-color: #2C3E50;"> spark-submit processStreamData.py MOST_COMMENTED</pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+          </div>
+          <div class="col-xl-8 col-lg-7">
+              <img class="img-fluid featured-text mb-3 mb-lg-0" src="../img/codigos/mostcommented.PNG" alt="">
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+        
+          <div class="featured-text text-center text-lg-left">
+            <h4>VER VIDEOS CON MÁS LIKES</h4>
+            <pre class="text-white-50 mb-0" style="background-color: #2C3E50;"> spark-submit processStreamData.py MOST_LIKED</pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+          </div>
+          <div class="col-xl-8 col-lg-7">
+              <img class="img-fluid featured-text mb-3 mb-lg-0" src="../img/codigos/mostiked.PNG" alt="">
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+        
+          <div class="featured-text text-center text-lg-left">
+            <h4>VER VIDEOS CON MÁS VISITAS</h4>
+            <pre class="text-white-50 mb-0" style="background-color: #2C3E50;"> spark-submit processStreamData.py most_view</pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+          </div>
+          <div class="col-xl-8 col-lg-7">
+              <img class="img-fluid featured-text mb-3 mb-lg-0" src="../img/codigos/mostview.PNG" alt="">
+          </div>
+      </div>
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>VER VIDEOS SEGÚN AÑO</h4>
+            <p class="text-black-50 mb-0">Mostrar por consola la cantidad de videos más vistos según el año</p>
+            <pre class="text-white-50  mb-0" style="background-color: #2C3E50;">&nbsp spark-submit globalStadistics.py YEAR </pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+            <h4>VER VIDEOS SEGÚN MES</h4>
+            <p class="text-black-50 mb-0">Mostrar por consola la cantidad de videos más vistos según el mes</p>
+            <pre class="text-white-50  mb-0" style="background-color: #2C3E50;">&nbsp spark-submit globalStadistics.py MONTH </pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+
+          </div>
+      </div>
+
+
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>VER GRÁFICAS SEGÚN PAÍS</h4>
+            <p class="text-black-50 mb-0">Mostrar la gráfica a nivel mundial</p>
+            <pre class="text-white-50  mb-0" style="background-color: #2C3E50;">&nbsp spark-submit topCategories.py -m graph all </pre>
+            <p class="text-black-50 mb-0">&nbsp </p>
+            <p class="text-black-50 mb-0">Muestra la gráfica del país seleccionado</p>
+            <pre class="text-white-50  mb-0" style="background-color: #2C3E50;">&nbsp spark-submit topCategories.py -m graph [pais] </pre>
+            <p class="text-black-50 mb-0">&nbsp [pais] puede ser CA, DE, FR, GB, IN, JP, KR, MX, RU, US</p>
+          </div>
+      </div>
+
+
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>TIEMPO REAL</h4>
+            <a href="../tiemporeal.html" class="btn btn-primary js-scroll-trigger">Ir a tiempo real</a>
+          </div>
+      </div>
+
+      
+      <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+          <div class="featured-text text-center text-lg-left">
+            <h4>MACHINE LEARNING</h4>
+            <a href="../machinelearning.html" class="btn btn-primary js-scroll-trigger">Ver machine learning</a>
+          </div>
+      </div>
+
+
+</div> 
+</section>
+
+
+  <!-- Footer -->
+  <footer class="bg-black small text-center text-white-50">
+    <div class="container">
+      Copyright &copy; Análisis de Youtube 2019
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="../js/grayscale.min.js"></script>
+
+</body>
+
+</html>

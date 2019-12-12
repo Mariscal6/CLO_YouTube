@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Análisis Youtube</title>
+  <link rel="shortcut icon" href="../img/icon.png"> 
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/grayscale.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Volver arriba</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="../../index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="../about.html">Sobre el proyecto</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="../graficas.html">Gráficas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="../tiemporeal.html">Tiempo real</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link js-scroll-trigger" href="../machinelearning.html">Machine Learning</a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- About Section -->
+  <section id="about" class="about-section text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-white mb-4">ANÁLISIS GLOBAL</h2>
+          <p class="text-white-50">Resultados tras el análisis de los videos a nivel global</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Projects Section -->
+<section id="grafica" class="projects-section bg-light ">
+  <div class="container d-flex h-100 align-items-center">
+            <!-- Featured Project Row -->
+            <div class="container text-center">
+                <h2 class="text-black-50 mb-4">GRÁFICA</h2>
+              <div class="container d-flex h-100 align-items-center">
+                  
+                  <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                      <img class="img-fluid mb-3 mb-lg-0" src="../img/graficas/categoriaTopGlobal.png" alt="">
+                  </div>
+              </div>
+              <div class="container row align-items-center bg-light text-center">
+                  <div class="text-lg-left">
+                      <p class="text-black-50">Podemos ver que hay un gran número de visitas en la temática:</p>
+                      <p class="text-black-50">&nbsp ■ Entretenimiento</p>
+                      <p class="text-black-50">&nbsp ■ Blogs</p>
+                      <p class="text-black-50">También hay muchas temáticas que se siguen a nivel intermedio como:</p>
+                      <p class="text-black-50">&nbsp ■ Noticias y política</p>
+                      <p class="text-black-50">&nbsp ■ Música</p>
+                      <p class="text-black-50">Y por el contrario, un bajo número de visitas a los videos de tipo:</p>
+                      <p class="text-black-50">&nbsp ■ Shows</p>
+                      <p class="text-black-50">&nbsp ■ Viajes</p>
+                      <p class="text-black-50">&nbsp ■ Animales</p>
+                      <p class="text-black-50">&nbsp ■ Automovilismo</p>
+                  </div>
+              </div>
+              <div class=" text-center text-lg-left">
+                  <h4>Código de ejecución</h4>
+                  <pre class="text-white-50 mb-0" style="background-color: #2C3E50;">spark-submit topCategories.py -m graph ALL</pre>
+                  <p class="text-black-50 mb-0">&nbsp </p>
+              </div>
+            </div>
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+  <footer class="bg-black small text-center text-white-50">
+    <div class="container">
+      Copyright &copy; Análisis de Youtube 2019
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="../js/grayscale.min.js"></script>
+
+</body>
+
+</html>
