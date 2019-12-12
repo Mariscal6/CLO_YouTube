@@ -13,7 +13,7 @@
 	
 ## Web 
 
-Pagina web: https://faraondaniel.github.io/prueba-web/index.html
+Pagina web: https://mariscal6.github.io/CLO_YouTube/index.html
 	
 ## Descripción
 
