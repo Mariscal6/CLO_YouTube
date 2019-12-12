@@ -30,7 +30,6 @@ def processVideos(apikey,regionCode):
     end = False
     while (not end):
         if youtubeData != None:
-            print(youtubeData)
             videos = youtubeData['items']
 
             for video in videos:
@@ -160,8 +159,7 @@ if __name__ == "__main__":
         if (args.regionCode.upper() == "ALL"):
             resp = list()
             for code in countries.keys():
-                resp += processVideos(apikey,code) 
-                print(len(resp))
+                resp += processVideos(apikey,code)
                 if (len(resp) > MAX_ROWS): break
         else:
             resp = processVideos(apikey,args.regionCode.upper())
@@ -171,7 +169,6 @@ if __name__ == "__main__":
             resp = list()
             for code in countries.keys():
                 resp += processVideos(apikey,code)
-                print(len(resp))
                 if (len(resp) > MAX_ROWS): break
         else:
             resp = processVideos(apikey,args.regionCode.upper())
